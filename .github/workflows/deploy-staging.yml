@@ -1,0 +1,19 @@
+name: Stage the app
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Only run if PR has the label 'stage'
+    if: contains(github.event.pull_request.labels.*.name, 'stage')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Echo staging
+        run: echo "Deploying app to staging..."
